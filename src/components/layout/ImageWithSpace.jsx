@@ -21,20 +21,25 @@ const StyledImage = styled.div`
 `
 const StyledContainer = styled.div`
  background-color: white;
- padding: 30px;
+ padding: 30px 50px;
 
- min-width: 600px;
+ min-width: 700px;
 
  @media(min-width ${WIDTH_BREAK}){
-    width: 100%;
-    min-width: calc(${WIDTH_BREAK} - 60px);
+    min-width: calc(${WIDTH_BREAK} - 100px);
 
  }
 
  @media (max-width ${WIDTH_BREAK}){
     width: 100%;
  }
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `
+
+ 
  function ImageWithSpace({children, image}) {
     return(
         <StyledFlex>
