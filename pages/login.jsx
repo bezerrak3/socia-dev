@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import Link from "next/link"
 
 import ImageWithSpace from "../src/components/layout/ImageWithSpace"
 import H1 from "../src/components/typography/H1"
@@ -35,7 +36,7 @@ export default function LoginPage() {
               <Input label="Password" type="password" />
               <Button>Entrar</Button>
            </Form>
-           <Text> Não possui uma conta? <a href="#">Faça seu cadastro</a></Text>
+           <Text> Não possui uma conta? <Link href="/signup">Faça seu cadastro</Link></Text>
         </FormContainer>
        </ImageWithSpace>
     )

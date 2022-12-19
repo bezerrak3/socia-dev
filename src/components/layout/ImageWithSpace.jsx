@@ -23,8 +23,6 @@ const StyledContainer = styled.div`
  background-color: ${props => props.theme.white};
  padding: 30px 50px;
 
- min-width: 700px;
-
  @media(min-width ${WIDTH_BREAK}){
     min-width: calc(${WIDTH_BREAK} - 100px);
 
@@ -36,7 +34,14 @@ const StyledContainer = styled.div`
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+
+  &:before, &:after{
+     content: '';
+     margin: auto;
+  }
 `
 
  
