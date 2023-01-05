@@ -1,4 +1,4 @@
-import connect from "next-connect"
+import createHandler from "../../../lib/middlewares/nextConnect"
 import Joi from "joi"
 
 import validate from "../../../lib/middlewares/validation"
@@ -13,10 +13,9 @@ const postSchema = Joi.object({
     password: Joi.string().required().max(50).min(6),
 })
     
-const signup = connect() // definição de verbo http
- .post(validate({body: postSchema}),(req, res) =>{
-    console.log(req.body)
-    signupUser()
+const signup = createHandler() // definição de verbo http
+  signup.post(validate({body: postSchema}),(req, res) =>{  
+    signupUser(req.body)
     res.status(200).json({ teste: "ok" })
  })
 
