@@ -1,5 +1,6 @@
-import createHandler from "../../../lib/middlewares/nextConnect"
 import Joi from "joi"
+import createHandler from "../../../lib/middlewares/nextConnect"
+
 
 import validate from "../../../lib/middlewares/validation"
 
