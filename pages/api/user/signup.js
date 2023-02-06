@@ -6,17 +6,10 @@ import { ironConfig } from "../../../lib/middlewares/ironSession"
 import validate from "../../../lib/middlewares/validation"
 
 import {signupUser} from "../../../modules/user/user.service"
-
-const postSchema = Joi.object({
-    firstName: Joi.string().required().max(50),
-    lastName: Joi.string().required().max(50),
-    user: Joi.string().required().max(30),
-    email: Joi.string().email().required().max(100),
-    password: Joi.string().required().max(50).min(6),
-})
+import { signupSchema } from "../../../modules/user/user.schema"
     
 const signup = createHandler() // definição de verbo http
-  signup.post(validate({body: postSchema}), async (req, res) =>{  
+  signup.post(validate({body: signupSchema}), async (req, res) =>{  
     try{
       const user = await signupUser(req.body)
 
