@@ -21,7 +21,12 @@ const signup = createHandler() // definição de verbo http
 
       res.status(201).json({ ok: true })
     }catch(err){
-      console.error(err)
+      if (err.code === 11000){
+        return res.status(400).send({
+          code: 11000,
+          duplicatedKey: Object.keys(err.keyPattern)[0] 
+        })
+      }
       throw err
     }
     
