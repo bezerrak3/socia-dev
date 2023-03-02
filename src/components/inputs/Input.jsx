@@ -49,7 +49,7 @@ const Input = ({label,name,control,defaultValue='',...props}) => {
    return(
       <InputContainer>
         <StyledLabel>{label}</StyledLabel>
-        <StyledInput placeholder={label}{...props} value={value} onChange={onChange}/>
+        <StyledInput placeholder={label}{...props} error={error} value={value} onChange={onChange}/>
         {error && <ErrorLabel>{errorMessage[error.type] || error.message}</ErrorLabel>}
       </InputContainer> 
 
