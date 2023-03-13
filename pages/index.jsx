@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react"
 import styled from "styled-components"
-import axios from 'axios'
 import useSWR from "swr"
 
 import { withIronSessionSsr } from 'iron-session/next'
@@ -12,6 +10,8 @@ import H3 from "../src/components/typography/H3"
 import Post from "../src/components/cards/Post"
 import H4 from "../src/components/typography/H4"
 import { compareSync } from "bcryptjs"
+import axios from "axios"
+import { useEffect, useState } from "react"
 
 const Content = styled.div`
  margin: 50px 0;
@@ -36,10 +36,10 @@ const PostContainer = styled.div`
   margin-top: 20px;
 `
 
-const fetcher = url => axios.get(url).then(res => res.data)
+const fetcher  = url => axios.get(url).then(res => res.data)
 
 function HomePage ({user}) {
-  const {data} = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/post`,fetcher)
+  const { data } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/post`, fetcher)
 
 
   return (
@@ -51,13 +51,10 @@ function HomePage ({user}) {
             <LastPostText>
              <H3>Últimas postagens</H3>
             </LastPostText>
-            <RefreshPostContainer>
-              <RefreshPosts>Carregar novas postagens</RefreshPosts>
-            </RefreshPostContainer>
             <PostContainer>
-                {
-                  data?.map(post => <Post key={post._id} text={post.text} user={post.createdBy.user} date={post.createdDate}/>)
-                }
+               {
+                data?.map(post => <Post key={post._id} user={post.createdBy.user} date ={post.createdDate} text={post.text}/>)
+               }  
             </PostContainer>
         </Container>
      </Content>
@@ -68,7 +65,6 @@ function HomePage ({user}) {
 
 export const getServerSideProps = withIronSessionSsr(async function getServerSideProps({req}){
   const user =  req.session.user
-  console.log(user)
   if(!user){
     return{
       redirect: {
