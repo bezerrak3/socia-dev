@@ -1,3 +1,4 @@
+import { useState } from "react"
 import styled from "styled-components"
 import Link from "next/link"
 import {useForm} from 'react-hook-form'
@@ -36,6 +37,13 @@ export default function LoginPage() {
       resolver: joiResolver(loginSchema)
    }) 
 
+   const [load, setLoad] = useState(false)
+
+   const loadclick = async (onSubmit) => {
+       await setLoad(onSubmit)
+   }
+   
+
    const onSubmit = async (data) => {
       try{
          const { status } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/login`,data)
@@ -66,7 +74,7 @@ export default function LoginPage() {
            <Form onSubmit={handleSubmit(onSubmit)}>
               <Input label="E-mail ou Usuário" name = "userOrEmail" control={control}/>
               <Input label="Password" type="password" name= 'password' control={control}/>
-              <Button type= 'submit' disabled={Object.keys(errors).length > 0}>Entrar</Button>
+              <Button loading={!loadclick} type= 'submit' disabled={Object.keys(errors).length > 0}>Entrar</Button>
            </Form>
            <Text> Não possui uma conta? <Link href="/signup">Faça seu cadastro</Link></Text>
         </FormContainer>
