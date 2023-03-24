@@ -39,13 +39,11 @@ export default function LoginPage() {
 
    const [load, setLoad] = useState(false)
 
-   const loadclick = async (onSubmit) => {
-       await setLoad(onSubmit)
-   }
    
 
    const onSubmit = async (data) => {
       try{
+         setLoad(true)
          const { status } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/login`,data)
          if(status === 200){
             router.push('/')
@@ -74,7 +72,7 @@ export default function LoginPage() {
            <Form onSubmit={handleSubmit(onSubmit)}>
               <Input label="E-mail ou Usuário" name = "userOrEmail" control={control}/>
               <Input label="Password" type="password" name= 'password' control={control}/>
-              <Button loading={!loadclick} type= 'submit' disabled={Object.keys(errors).length > 0}>Entrar</Button>
+              <Button loading={load} type= 'submit' disabled={Object.keys(errors).length > 0}>Entrar</Button>
            </Form>
            <Text> Não possui uma conta? <Link href="/signup">Faça seu cadastro</Link></Text>
         </FormContainer>

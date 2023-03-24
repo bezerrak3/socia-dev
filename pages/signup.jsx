@@ -40,8 +40,11 @@ function SignupPage() {
     })
      
 
+    const [loadCreate,setLoadCreate] = useState(false)
+
     const handleForm = async (data) =>{
         try{
+           setLoadCreate(true)
            const {status} = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/signup`, data)
            if(status === 201){
             router.push('/')
@@ -67,7 +70,7 @@ function SignupPage() {
                     <Input label="Usuário" name='user' control={control} />
                     <Input label="E-mail" type="email" name='email' control={control} />
                     <Input label="Password" type="password" name='password' control={control} />
-                    <Button type="submit" disabled={Object.keys(errors).length > 0}>Cadastrar</Button>
+                    <Button loading={loadCreate} type="submit" disabled={Object.keys(errors).length > 0}>Cadastrar</Button>
                 </Form>
                 <Text> Já possui uma conta? <Link href="/login">Faça seu login</Link></Text>
             </FormContainer>
